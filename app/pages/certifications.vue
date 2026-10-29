@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import anime from 'animejs'
 import { nextTick, ref } from 'vue'
 
 interface Certificate {
@@ -55,10 +56,31 @@ async function openCertificate(certificate: Certificate) {
   selectedCertificate.value = certificate
   await nextTick()
   dialog.value?.showModal()
+
+  if (dialog.value) {
+    anime.remove(dialog.value)
+    anime({
+      targets: dialog.value,
+      opacity: [0, 1],
+      scale: [0.8, 1],
+      duration: 300,
+      easing: 'easeOutBack',
+    })
+  }
 }
 
 function closeCertificate() {
-  dialog.value?.close()
+  if (!dialog.value?.open) return
+
+  anime.remove(dialog.value)
+  anime({
+    targets: dialog.value,
+    opacity: [1, 0],
+    scale: [1, 0.8],
+    duration: 200,
+    easing: 'easeInQuad',
+    complete: () => dialog.value?.close(),
+  })
 }
 
 useHead({
@@ -143,6 +165,7 @@ useHead({
     <dialog
       ref="dialog"
       @click.self="closeCertificate"
+      @cancel.prevent="closeCertificate"
       @close="selectedCertificate = null"
     >
       <button id="close-btn" type="button" aria-label="Close certificate" @click="closeCertificate">
