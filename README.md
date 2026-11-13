@@ -73,3 +73,16 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Page components
+
+All routes use the shared layout in `app/layouts/default.vue`, which renders `SiteNavbar` and the page content. Shared document metadata lives in `app/app.vue`; each page sets its own title.
+
+- `ProfileHero`: home page name, introduction, and portrait.
+- `AboutBiography`: biography and career goals.
+- `TechStackSection`: technology list, rendered with reusable `TechStackCard` components.
+- `CertificateGallery`: certificate data and card list.
+- `CertificateCard`: badge image and credential link; emits the selected certificate.
+- `CertificatePreviewDialog`: full certificate preview and its open/close animations.
+
+Components live in `app/components/` and use Nuxt auto-imports. The certificate type is shared through `app/types/certificate.ts`.

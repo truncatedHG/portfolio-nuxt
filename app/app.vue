@@ -2,6 +2,23 @@
 import anime from 'animejs'
 import { nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 
+useHead({
+  meta: [
+    { charset: 'UTF-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+  ],
+  link: [
+    {
+      rel: 'icon',
+      href: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Truncated_octahedron_(green).png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap',
+    },
+  ],
+})
+
 const route = useRoute()
 
 function animatePage() {
@@ -91,6 +108,8 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
