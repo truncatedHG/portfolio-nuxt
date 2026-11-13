@@ -51,15 +51,6 @@ function animatePage() {
   })
 
   anime({
-    targets: '.navbar-item',
-    translateY: [-20, 0],
-    opacity: [0, 1],
-    duration: 700,
-    delay: anime.stagger(50),
-    easing: 'easeOutCubic',
-  })
-
-  anime({
     targets: '.name',
     translateY: [24, 0],
     opacity: [0, 1],
@@ -78,35 +69,7 @@ function animatePage() {
   })
 }
 
-function animateNavbarItem(event: Event, translateY: number) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  if (!(event.target instanceof Element)) return
-
-  const item = event.target.closest('.navbar-item')
-  if (!item) return
-
-  if (event.relatedTarget instanceof Node && item.contains(event.relatedTarget)) return
-
-  anime.remove(item)
-  anime({
-    targets: item,
-    translateY,
-    duration: 300,
-    easing: 'easeOutExpo',
-  })
-}
-
-function onNavbarPointerOver(event: Event) {
-  animateNavbarItem(event, -5)
-}
-
-function onNavbarPointerOut(event: Event) {
-  animateNavbarItem(event, 0)
-}
-
 onMounted(() => {
-  document.addEventListener('pointerover', onNavbarPointerOver)
-  document.addEventListener('pointerout', onNavbarPointerOut)
   animatePage()
 })
 
@@ -119,9 +82,7 @@ watch(
 )
 
 onBeforeUnmount(() => {
-  document.removeEventListener('pointerover', onNavbarPointerOver)
-  document.removeEventListener('pointerout', onNavbarPointerOut)
-  anime.remove('.navbar-item, .name, .content, .title')
+  anime.remove('.name, .content, .title')
 })
 </script>
 

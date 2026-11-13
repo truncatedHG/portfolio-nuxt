@@ -32,12 +32,37 @@ watch(() => route.fullPath, () => { isMenuOpen.value = false })
         </svg>
       </button>
       <div id="navMenu" class="w-full lg:block lg:w-auto lg:mx-auto" :class="isMenuOpen ? 'block' : 'hidden'">
-        <ul class="menu w-full gap-1 rounded-2xl bg-primary/5 p-1.5 lg:menu-horizontal">
+        <ul class="flex w-full flex-col gap-1 rounded-2xl bg-primary/5 p-1.5 lg:flex-row">
           <li v-for="link in links" :key="link.to">
-            <NuxtLink class="navbar-item rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-primary/10" :class="route.path === link.to ? 'bg-primary text-primary-content hover:bg-primary' : 'text-base-content/75'" :to="link.to" @click="onNavigate($event, link.to)">{{ link.label }}</NuxtLink>
+            <NuxtLink class="navbar-item block rounded-xl px-4 py-2.5 text-sm font-medium" :class="{ 'is-active': !error && route.path === link.to }" :to="link.to" @click="onNavigate($event, link.to)">{{ link.label }}</NuxtLink>
           </li>
         </ul>
       </div>
     </nav>
   </header>
 </template>
+
+<style scoped>
+.navbar-item {
+  color: var(--color-base-content);
+  background-color: transparent;
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.navbar-item:hover,
+.navbar-item:focus-visible {
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.navbar-item.is-active {
+  color: var(--color-primary-content);
+  background-color: var(--color-primary);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .navbar-item:hover {
+    transform: translateY(-5px);
+  }
+}
+</style>
