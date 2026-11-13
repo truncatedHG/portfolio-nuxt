@@ -3,6 +3,15 @@ import { ref, watch } from 'vue'
 
 const isMenuOpen = ref(false)
 const route = useRoute()
+const error = useError()
+
+function onNavigate(event: MouseEvent, to: string) {
+  isMenuOpen.value = false
+  if (error.value && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0) {
+    event.preventDefault()
+    return clearError({ redirect: to })
+  }
+}
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about-me', label: 'About Me' },
@@ -25,7 +34,7 @@ watch(() => route.fullPath, () => { isMenuOpen.value = false })
       <div id="navMenu" class="w-full lg:block lg:w-auto lg:mx-auto" :class="isMenuOpen ? 'block' : 'hidden'">
         <ul class="menu w-full gap-1 rounded-2xl bg-primary/5 p-1.5 lg:menu-horizontal">
           <li v-for="link in links" :key="link.to">
-            <NuxtLink class="navbar-item rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-primary/10" :class="route.path === link.to ? 'bg-primary text-primary-content hover:bg-primary' : 'text-base-content/75'" :to="link.to" @click="isMenuOpen = false">{{ link.label }}</NuxtLink>
+            <NuxtLink class="navbar-item rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-primary/10" :class="route.path === link.to ? 'bg-primary text-primary-content hover:bg-primary' : 'text-base-content/75'" :to="link.to" @click="onNavigate($event, link.to)">{{ link.label }}</NuxtLink>
           </li>
         </ul>
       </div>
