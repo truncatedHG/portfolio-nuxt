@@ -4,7 +4,6 @@ useHead({ title: 'Tech Stack | Aldrian Diaz' })
 
 <template>
   <div>
-    <br>
     <TechStackSection />
   </div>
 </template>

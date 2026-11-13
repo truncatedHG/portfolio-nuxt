@@ -39,13 +39,8 @@ const technologies = [
 </script>
 
 <template>
-<div class="has-text-centered">
-      <h1 class="is-size-1 name">Languages</h1>
-    </div>
-
-    <br><br>
-
-    <div class="figure-container">
-      <TechStackCard v-for="technology in technologies" :key="technology.name" v-bind="technology" />
-    </div>
+  <section>
+    <SectionHeading title="Languages" />
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4"><TechStackCard v-for="technology in technologies" :key="technology.name" v-bind="technology" /></div>
+  </section>
 </template>

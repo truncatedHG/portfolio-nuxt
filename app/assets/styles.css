@@ -1,183 +1,79 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Open%20Sans:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
-/* root stuff */
-:root {
-  --bulma-family-primary: 'Google Sans', 'Roboto', sans-serif;
+@plugin "daisyui" {
+  themes: false;
 }
 
-body {
-  font-family: 'Google Sans', 'Roboto', sans-serif !important;
-  color: #8e43a1 !important;
-  background-color: rgba(225, 205, 226, 0.945);
-  min-height: 100vh;
-
-
+/* Match the portfolio's existing purple and pale lavender palette. */
+@plugin "daisyui/theme" {
+  name: "portfolio";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #e3d0e4;
+  --color-base-200: #dcc5de;
+  --color-base-300: #cfb7d2;
+  --color-base-content: #593362;
+  --color-primary: #8e43a1;
+  --color-primary-content: #e3d0e4;
+  --color-secondary: #9a8a9b;
+  --color-secondary-content: #ffffff;
+  --color-accent: #8e43a1;
+  --color-accent-content: #ffffff;
+  --color-neutral: #444444;
+  --color-neutral-content: #ffffff;
+  --color-info: #3678a3;
+  --color-info-content: #ffffff;
+  --color-success: #327a50;
+  --color-success-content: #ffffff;
+  --color-warning: #e6bd54;
+  --color-warning-content: #322807;
+  --color-error: #b84343;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
-
-/* index */
-.name {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    margin-left: 30px;
-    margin-right: 30px;
-    
+@theme {
+  --font-sans: 'Google Sans', 'Roboto', sans-serif;
 }
 
-
-/* navbar */
-.navbar-menu {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    z-index: 9999;
+@layer base {
+  body {
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    background-color: var(--color-base-100);
+    background-image: radial-gradient(ellipse at top right, rgb(255 255 255 / 0.35), transparent 65%);
+    color: var(--color-base-content);
   }
 
-  .navbar-item {
-    font-size: 1.5rem;   /* makes the text bigger */
-    padding: 0.75rem 1rem; /* increases clickable area */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .navbar {
-    min-height: 4rem; /* default bulma is 3.25rem, increase this */
-    padding: 1rem;
+  :where(a, button):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
   }
+}
 
-  .navbar-burger {
-    height: 100%;
-    width: 4rem;
-  }
+.certificate-modal::backdrop {
+  background: rgb(0 0 0 / 0.5);
+  backdrop-filter: blur(4px);
+}
 
-  .navbar-burger span {
-    background-color: rgba(225, 205, 226, 0.945) !important;
-    color: #8e43a1 !important;
-  }
-
-  .navbar,
-  .navbar-menu,
-  .navbar-brand,
-  .navbar-start,
-  .navbar-end,
-  .navbar-center {
-  background-color: #8e43a1 !important;
-  }
-
-  .navbar-item:hover,
-  .navbar-item:focus,
-  .navbar-link:hover {
-  background-color: #8e43a1 !important;
-  color: rgba(154, 138, 155, 0.945) !important;
-  }
-
-  .navbar-item,
-  .navbar-link {
-  color: rgba(225, 205, 226, 0.945) !important;
-  }
-
-  .figure-container {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .figure-container figure {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .figure-container figure img {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-  }
-
-  .figure-container figcaption {
-    text-align: center;
-    margin-top: 8px;
-  }
-  
-  img {
-    max-width: 100%;    
-    height: auto;
-  }
-
-  /* dialog */
-
-  button.image {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  button.image:hover img {
-    opacity: 0.85;
-    transition: opacity 0.2s;
-  }
-  
-  dialog {
-    border: none;
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    transform-origin: center center;
-    object-fit: contain;
-    max-width: min(900px, calc(100vw - 2rem));
-    max-height: calc(100vh - 2rem);
-  }
-  
-  dialog[open] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  dialog::backdrop {
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-  }
-  
-  #close-btn {
-    display: block;
-    margin-left: auto;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: #666;
-  }
-  
-  #dialog-img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-  }
-  
-  #dialog-caption {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #444;
-  }
-
-  .certificate {
-    padding: 20px;
-    width: 200px;
-    height: 200px;
-  }
-
-  .figText {
-    color: #8e43a1 !important;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  
+.certificate-modal .modal-box {
+  background: #ffffff;
+  color: #444444;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.2);
+  transform-origin: center;
+  /* Anime.js controls the existing opening and closing animations. */
+  transition: none;
+}

@@ -4,7 +4,6 @@ useHead({ title: 'Web Portfolio | Aldrian Diaz' })
 
 <template>
   <div>
-    <br>
     <ProfileHero />
   </div>
 </template>

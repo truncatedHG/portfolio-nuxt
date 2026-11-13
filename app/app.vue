@@ -3,6 +3,7 @@ import anime from 'animejs'
 import { nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 
 useHead({
+  htmlAttrs: { 'data-theme': 'portfolio' },
   meta: [
     { charset: 'UTF-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
@@ -22,44 +23,46 @@ useHead({
 const route = useRoute()
 
 function animatePage() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
   anime({
     targets: '.title',
-    translateY: [50, 0],
+    translateY: [24, 0],
     opacity: [0, 1],
-    duration: 1200,
-    delay: 600,
-    easing: 'easeOutElastic',
+    duration: 700,
+    delay: 100,
+    easing: 'easeOutCubic',
   })
 
   anime({
     targets: '.navbar-item',
     translateY: [-20, 0],
     opacity: [0, 1],
-    duration: 1200,
-    delay: anime.stagger(100),
-    easing: 'easeOutElastic',
+    duration: 700,
+    delay: anime.stagger(50),
+    easing: 'easeOutCubic',
   })
 
   anime({
     targets: '.name',
-    translateY: [100, 0],
+    translateY: [24, 0],
     opacity: [0, 1],
-    duration: 1200,
-    delay: anime.stagger(200),
-    easing: 'easeOutElastic',
+    duration: 700,
+    delay: anime.stagger(70),
+    easing: 'easeOutCubic',
   })
 
   anime({
     targets: '.content',
-    translateY: [100, 0],
+    translateY: [24, 0],
     opacity: [0, 1],
-    duration: 1200,
-    delay: anime.stagger(100),
-    easing: 'easeOutElastic',
+    duration: 700,
+    delay: anime.stagger(50),
+    easing: 'easeOutCubic',
   })
 }
 
 function animateNavbarItem(event: Event, translateY: number) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
   if (!(event.target instanceof Element)) return
 
   const item = event.target.closest('.navbar-item')

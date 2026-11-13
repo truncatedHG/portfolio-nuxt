@@ -44,18 +44,9 @@ const certificates: Certificate[] = [
 </script>
 
 <template>
-<h1 class="is-size-1 has-text-centered content">Certifications</h1>
-
-    <div class="has-text-centered">
-      <div class="figure-container">
-        <CertificateCard
-          v-for="certificate in certificates"
-          :key="certificate.title"
-          :certificate="certificate"
-          @select="previewDialog?.open($event)"
-        />
-      </div>
-    </div>
-
+  <section>
+    <SectionHeading title="Certifications" />
+    <div class="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3"><CertificateCard v-for="certificate in certificates" :key="certificate.title" :certificate="certificate" @select="previewDialog?.open($event)" /></div>
     <CertificatePreviewDialog ref="previewDialog" />
+  </section>
 </template>
