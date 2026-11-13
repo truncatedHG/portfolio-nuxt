@@ -18,10 +18,6 @@ useHead({
   ],
   link: [
     { rel: 'canonical', href: () => canonicalUrl.value },
-    {
-      rel: 'icon',
-      href: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Truncated_octahedron_(green).png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original',
-    },
   ],
 })
 
