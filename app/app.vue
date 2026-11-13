@@ -2,13 +2,22 @@
 import anime from 'animejs'
 import { nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 
+const route = useRoute()
+const config = useRuntimeConfig()
+const requestUrl = useRequestURL()
+// A configured origin keeps canonical URLs stable behind deployment proxies.
+const siteOrigin = new URL(config.public.siteUrl || requestUrl.origin).origin
+const canonicalUrl = computed(() => new URL(route.path, siteOrigin).href)
+const previewImage = new URL('/images/aldrian.JPEG', siteOrigin).href
+
 useHead({
-  htmlAttrs: { 'data-theme': 'portfolio' },
+  htmlAttrs: { lang: 'en', 'data-theme': 'portfolio' },
   meta: [
     { charset: 'UTF-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
   ],
   link: [
+    { rel: 'canonical', href: () => canonicalUrl.value },
     {
       rel: 'icon',
       href: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Truncated_octahedron_(green).png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original',
@@ -20,7 +29,19 @@ useHead({
   ],
 })
 
-const route = useRoute()
+useSeoMeta({
+  author: 'Aldrian Diaz',
+  ogSiteName: 'Aldrian Diaz Portfolio',
+  ogType: 'website',
+  ogLocale: 'en_US',
+  ogUrl: () => canonicalUrl.value,
+  ogImage: previewImage,
+  ogImageAlt: 'Portrait of Aldrian Diaz',
+  twitterCard: 'summary',
+  twitterImage: previewImage,
+  twitterImageAlt: 'Portrait of Aldrian Diaz',
+  themeColor: '#8e43a1',
+})
 
 function animatePage() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return

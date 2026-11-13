@@ -98,3 +98,11 @@ Tailwind utilities handle typography, spacing, image sizes, and responsive layou
 The interface follows Tailwind utility-first styling and DaisyUI component patterns. A shared responsive header and SectionHeading keep the four routes consistent. Purple (#8e43a1) and lavender (#e3d0e4) remain the core colors, with deeper purple body text for readability. Layouts include a portrait-led hero, biography paragraphs, certificate cards, and a responsive technology grid. Animations respect reduced-motion preferences.
 
 References: [Tailwind utility classes](https://tailwindcss.com/docs/styling-with-utility-classes) and [DaisyUI gallery](https://daisyui.com/components/).
+
+## SEO and social previews
+
+Every route sets its title with `useHead` and its description, Open Graph title/description, and Twitter title/description with `useSeoMeta`. Shared author, language, social image, social card type, and reactive canonical/Open Graph URLs live in `app/app.vue`. The existing portrait is used for summary-card previews.
+
+Set `NUXT_PUBLIC_SITE_URL` to your real production origin (including https://) when deploying. Without this setting, URLs use the incoming request origin, which supports local development. Canonical URLs exclude query parameters and fragments.
+
+After deployment, enter each public page URL into [Meta Tags Toolkit](https://metatags.io/) to inspect search and social previews. Its remote crawler cannot reach a localhost-only development server. Implementation follows [Nuxt SEO and Meta](https://nuxt.com/docs/4.x/getting-started/seo-meta).
