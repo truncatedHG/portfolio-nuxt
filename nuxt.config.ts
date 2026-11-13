@@ -21,6 +21,9 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    optimizeDeps: {
+      include: ['@heroicons/vue/24/outline'],
+    },
     plugins: [tailwindcss()],
   },
 })

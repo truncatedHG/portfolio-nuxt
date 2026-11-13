@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import anime from 'animejs'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { nextTick, onBeforeUnmount, ref } from 'vue'
 import type { Certificate } from '~/types/certificate'
 
@@ -65,7 +66,7 @@ defineExpose({ open: openCertificate })
   >
     <div ref="panel" class="modal-box flex max-h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] max-w-[900px] flex-col items-center rounded-2xl border border-primary/15 p-4 text-center sm:p-6">
       <button class="btn btn-ghost btn-circle btn-sm ml-auto text-xl text-primary" type="button" aria-label="Close certificate" @click="closeCertificate">
-        &times;
+        <XMarkIcon class="h-5 w-5" aria-hidden="true" />
       </button>
       <img
         v-if="selectedCertificate"
